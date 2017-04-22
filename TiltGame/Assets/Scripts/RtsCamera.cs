@@ -9,11 +9,9 @@ public class RtsCamera : MonoBehaviour
     private const float c_ZOOM_MULT = 50;
     private const float c_ZOOM_DAMPING = 12f;
     private const float c_ZOOM_SCALE = 10;
-
+    
     [SerializeField]
     private Camera _camera;
-    [SerializeField]
-    private Transform _lookOffset;
 
     [SerializeField]
     private float _yaw;
@@ -28,10 +26,11 @@ public class RtsCamera : MonoBehaviour
     [SerializeField]
     private float _heightPower;
 
+    public Camera Camera { get { return _camera; } }
+
     void Start()
     {
         Assert.IsNotNull(_camera);
-        Assert.IsNotNull(_lookOffset);
         Assert.IsTrue(_camera.transform.parent == transform);
         _currentZoom = _zoomTarget;
     }
@@ -57,7 +56,7 @@ public class RtsCamera : MonoBehaviour
         float distance = Mathf.Pow(_currentZoom, _distancePower) * _zoomScale;
 
         _camera.transform.localPosition = new Vector3(0, height, -distance);
-        transform.localRotation = Quaternion.AngleAxis(_yaw, Vector3.up);
-        _camera.transform.LookAt(_lookOffset);
+        transform.localRotation = Quaternion.AngleAxis(_yaw, transform.up);
+        _camera.transform.LookAt(transform, transform.up);
     }
 }
