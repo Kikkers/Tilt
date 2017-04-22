@@ -6,9 +6,12 @@ public class TiltController : MonoBehaviour
     public float tiltMax = 45;
     public Camera _skyboxCamera;
     public Camera _mainCamera;
+    
+    public static Camera MainCamera { get; private set; }
 
     void Update()
     {
+        MainCamera = _mainCamera;
         transform.localRotation = Quaternion.identity;
         if (ActiveIsland != null)
         {   
