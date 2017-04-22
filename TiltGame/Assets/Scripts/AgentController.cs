@@ -1,7 +1,8 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.AI;
 
-[RequireComponent(typeof(NavMeshAgent), typeof(Rigidbody))]
+[RequireComponent(typeof(Rigidbody))]
 public class AgentController : MonoBehaviour
 {
     public IslandController owner;
@@ -13,6 +14,8 @@ public class AgentController : MonoBehaviour
 
     [SerializeField] private float _teeteringTime;
 
+    private TiltController _tiltController;
+
     void Awake()
     {
         _body = GetComponent<Rigidbody>();
@@ -22,7 +25,12 @@ public class AgentController : MonoBehaviour
 
     void FixedUpdate()
     {
-        _body.AddForce(new Vector3(1, 1, 1));
+        if (owner != null)
+        {
+            var vector = owner.COMPivotOffset;
+            vector.y = 0;
+            _body.AddForce(vector);
+        }
 
         // determine teetering
         NavMeshHit hit;
@@ -33,5 +41,10 @@ public class AgentController : MonoBehaviour
         {
             _teeteringTime += Time.fixedDeltaTime;
         }
+    }
+
+    internal void SetDestination(Tile tile)
+    {
+        _navAgent.SetDestination(tile.transform.position);
     }
 }

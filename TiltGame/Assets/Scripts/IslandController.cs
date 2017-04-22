@@ -5,9 +5,12 @@ using UnityEngine.Assertions;
 public class IslandController : MonoBehaviour
 {
     public Transform AgentParent;
+    public Transform AgentSpawns;
     public Transform Pivot;
     public Transform COMIndicator;
     public Vector3 COMPivotOffset;
+
+    public Tile HighlightedTile;
     
     [Space]
 
@@ -17,6 +20,7 @@ public class IslandController : MonoBehaviour
 
     [Space]
 
+    public GameObject AgentPrefab;
     public GameObject AirPrefab;
     public GameObject GroundPrefab;
     public GameObject MountainPrefab;
@@ -28,31 +32,41 @@ public class IslandController : MonoBehaviour
     
     public int Width = 1, Height = 1;
 
-    private Tile[,] allTiles;
+    private RaycastHit _mouseHit = default(RaycastHit);
+    private Tile[,] _allTiles;
+    private bool _isSelecting;
+    private Vector3 _selectStart;
+    private List<AgentController> _agents = new List<AgentController>();
+    private List<AgentController> _selectedAgents = new List<AgentController>();
 
     private void OnEnable()
     {
-        RecalculateMass();
+        foreach (var spawn in AgentSpawns.GetComponentsInChildren<Transform>())
+        {
+            if (spawn == AgentSpawns)
+                continue;
+            var agent = Instantiate(AgentPrefab).GetComponent<AgentController>();
+            agent.transform.SetParent(AgentParent);
+            agent.transform.position = spawn.position;
+            agent.transform.rotation = spawn.rotation;
+            agent.owner = this;
+            _agents.Add(agent);
+        }
     }
-
-    private void CollectTiles()
-    {
-
-    }
-
+    
     private void RecalculateMass()
     {
         // tiles
-        if (allTiles == null)
+        if (_allTiles == null)
         {
-            allTiles = new Tile[Width, Height];
-            for (int x = 0; x < transform.childCount; ++x)
+            _allTiles = new Tile[Width, Height];
+            for (int x = 0; x < Width; ++x)
             {
                 var column = transform.GetChild(x);
-                for (int y = 0; y < transform.childCount; ++y)
+                for (int y = 0; y < Height; ++y)
                 {
                     var tile = column.GetChild(y).GetComponent<Tile>();
-                    allTiles[x, y] = tile;
+                    _allTiles[x, y] = tile;
                 }
             }
         }
@@ -60,7 +74,7 @@ public class IslandController : MonoBehaviour
         // center of mass
         Vector3 centerOfMass = Vector3.zero;
         float massSum = 0;
-        foreach(Tile t in allTiles)
+        foreach(Tile t in _allTiles)
         {
             var pos = t.transform.position;
             var mass = t.Mass * TileMassMultiplier;
@@ -79,7 +93,7 @@ public class IslandController : MonoBehaviour
             centerOfMass /= massSum;
 
         COMPivotOffset = (centerOfMass - Pivot.position) * TotalMassMultiplier;
-        COMPivotOffset.y = 1;
+        COMPivotOffset.y = 0;
         COMIndicator.position = Pivot.position + COMPivotOffset;
     }
 
@@ -130,7 +144,7 @@ public class IslandController : MonoBehaviour
         }
     }
     
-    public void ReplaceTile(Tile oldTile, Tile.TileType newType)
+    public Tile ReplaceTile(Tile oldTile, Tile.TileType newType)
     {
         Tile parentTile;
         while ((parentTile = oldTile.transform.parent.GetComponent<Tile>()) != null)
@@ -147,19 +161,28 @@ public class IslandController : MonoBehaviour
         pos.z = y;
         newTile.transform.localPosition = pos;
         newTile.gameObject.name = "Tile " + y + ": " + newType.ToString();
-        allTiles[x, y] = newTile;
+        _allTiles[x, y] = newTile;
+        return newTile;
     }
 
     #endregion
-
+    
     void FixedUpdate()
     {
+        HighlightedTile = null;
+        if (TiltController.MainCamera != null)
+        {
+            Ray ray = TiltController.MainCamera.ScreenPointToRay(Input.mousePosition);
+            Physics.Raycast(ray, out _mouseHit);
+            if (_mouseHit.collider != null)
+            {
+                HighlightedTile = _mouseHit.collider.GetComponent<Tile>();
+            }
+        }
+        
         #region Editor
         if (Application.isEditor)
         {
-            if (GroundPrefab == null || MountainPrefab == null || FoodPrefab == null)
-                return;
-
             // resizing
             Width = Width < 1 ? 1 : Width;
             Height = Height < 1 ? 1 : Height;
@@ -173,10 +196,10 @@ public class IslandController : MonoBehaviour
             }
             while (transform.childCount > Width)
             {
-                Destroy(transform.GetChild(transform.childCount - 1));
+                DestroyImmediate(transform.GetChild(transform.childCount - 1).gameObject, false);
                 dirty = true;
             }
-            if (dirty)
+            if (dirty || transform.GetChild(0).childCount != Height)
             {
                 for (int x = 0; x < transform.childCount; ++x)
                 {
@@ -194,26 +217,54 @@ public class IslandController : MonoBehaviour
                     }
                     while (column.childCount > Height)
                     {
-                        Destroy(column.GetChild(column.childCount - 1));
+                        DestroyImmediate(column.GetChild(column.childCount - 1).gameObject, false);
                     }
                 }
-                allTiles = null;
+                _allTiles = null;
             }
 
-            if (Input.GetKey(KeyCode.P) && Camera.current != null)
+            if (Input.GetKey(KeyCode.P))
             {
-                Ray ray = Camera.current.ScreenPointToRay(Input.mousePosition);
-                RaycastHit hit;
-                Physics.Raycast(ray, out hit);
-                if (hit.collider != null)
-                {
-                    Tile tile = hit.collider.GetComponent<Tile>();
-                    if (tile != null && tile.Type != TilePainter)
-                        ReplaceTile(tile, TilePainter);
-                }
+                if (HighlightedTile != null && HighlightedTile.Type != TilePainter)
+                    HighlightedTile = ReplaceTile(HighlightedTile, TilePainter);
             }
         }
         #endregion
+        
+        if (Input.GetMouseButton(0))
+        {
+            if (!_isSelecting)
+            {
+                _selectStart = Input.mousePosition;
+            }
+            _isSelecting = true;
+        }
+        else
+        {
+            if (_isSelecting)
+            {
+                _selectedAgents.Clear();
+                Vector3 SelectEnd = Input.mousePosition;
+                Vector2 min = Vector3.Min(_selectStart, SelectEnd);
+                Vector2 max = Vector3.Max(_selectStart, SelectEnd);
+                Rect box = new Rect(min, max - min);
+                foreach (var agent in _agents)
+                {
+                    Vector2 screenpt = TiltController.MainCamera.WorldToScreenPoint(agent.transform.position);
+                    if (box.Contains(screenpt))
+                        _selectedAgents.Add(agent);
+                }
+            }
+            _isSelecting = false;
+        }
+
+        if (_selectedAgents.Count > 0 && HighlightedTile != null && Input.GetMouseButton(1))
+        {
+            foreach (var agent in _selectedAgents)
+            {
+                agent.SetDestination(HighlightedTile);
+            }
+        }
 
         RecalculateMass();
     }
