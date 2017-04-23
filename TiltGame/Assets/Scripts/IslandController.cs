@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -9,30 +10,45 @@ public class IslandController : MonoBehaviour
     public Transform Pivot;
     public Transform COMIndicator;
     public Transform CornerAndMeshParent;
+    public Transform TilesParent;
 
     [Space]
 
     public Vector3 COMPivotOffset;
     public Tile HighlightedTile;
-    
+    public List<Tile> MeteorSites = new List<Tile>();
+
     [Space]
 
     public float AgentMassMultiplier = 1;
     public float TileMassMultiplier = 1;
     public float TotalMassMultiplier = 1;
+    public float MeteorImpactStrength = 1;
+    public float MeteorTimeInterval = 10;
+
+    [Serializable]
+    private class Prefabs
+    {
+        public GameObject AgentPrefab = null;
+        public GameObject AirPrefab = null;
+        public GameObject GroundPrefab = null;
+        public GameObject MountainPrefab = null;
+        public GameObject FoodPrefab = null;
+
+        public GameObject GroundStraightPrefab = null;
+        public GameObject GroundInnerPrefab = null;
+        public GameObject GroundOuterPrefab = null;
+        public GameObject GroundFlatPrefab = null;
+
+        public GameObject ArtFoodPrefab = null;
+        public GameObject ArtMountainPrefab = null;
+        public GameObject ArtMeteorPrefab = null;
+    }
 
     [Space]
 
-    public GameObject AgentPrefab;
-    public GameObject AirPrefab;
-    public GameObject GroundPrefab;
-    public GameObject MountainPrefab;
-    public GameObject FoodPrefab;
-
-    public GameObject GroundStraightPrefab;
-    public GameObject GroundInnerPrefab;
-    public GameObject GroundOuterPrefab;
-    public GameObject GroundFlatPrefab;
+    [SerializeField]
+    private Prefabs _prefabs = new Prefabs();
 
     [Space]
 
@@ -42,21 +58,34 @@ public class IslandController : MonoBehaviour
 
     private RaycastHit _mouseHit = default(RaycastHit);
     private Tile[,] _allTiles;
+    private List<Vector3> _meteorPositions = new List<Vector3>();
+    private int _lastMeteorIndex = -1;
+    private float _timeUntilMeteor;
     private bool _isSelecting;
     private Vector3 _selectStart;
     private List<AgentController> _agents = new List<AgentController>();
     private List<AgentController> _selectedAgents = new List<AgentController>();
+    private int _tileLayer;
+
+    private void Awake()
+    {
+        _timeUntilMeteor = MeteorTimeInterval;
+        foreach (var meteor in MeteorSites)
+        {
+            if (meteor != null)
+                _meteorPositions.Add(meteor.transform.localPosition);
+        }
+    }
 
     private void OnEnable()
     {
-        CornerAndMeshParent.position = transform.position;
         _tileLayer = LayerMask.NameToLayer("Tile");
 
         foreach (var spawn in AgentSpawns.GetComponentsInChildren<Transform>())
         {
             if (spawn == AgentSpawns)
                 continue;
-            var agent = Instantiate(AgentPrefab).GetComponent<AgentController>();
+            var agent = Instantiate(_prefabs.AgentPrefab).GetComponent<AgentController>();
             agent.transform.SetParent(AgentParent);
             agent.transform.position = spawn.position;
             agent.transform.rotation = spawn.rotation;
@@ -73,7 +102,7 @@ public class IslandController : MonoBehaviour
             _allTiles = new Tile[Width, Height];
             for (int x = 0; x < Width; ++x)
             {
-                var column = transform.GetChild(x);
+                var column = TilesParent.GetChild(x);
                 for (int y = 0; y < Height; ++y)
                 {
                     var tile = column.GetChild(y).GetComponent<Tile>();
@@ -111,16 +140,6 @@ public class IslandController : MonoBehaviour
         COMPivotOffset = (centerOfMass - Pivot.position) * TotalMassMultiplier;
         COMPivotOffset.y = 0;
         COMIndicator.position = Pivot.position + COMPivotOffset;
-    }
-
-    private void Awake()
-    {
-        Assert.IsNotNull(GroundPrefab);
-        Assert.IsNotNull(MountainPrefab);
-        Assert.IsNotNull(FoodPrefab);
-        Assert.IsNotNull(AgentParent);
-        Assert.IsNotNull(Pivot);
-        Assert.IsNotNull(COMIndicator);
     }
     
     #region tiles
@@ -161,7 +180,7 @@ public class IslandController : MonoBehaviour
             case CornerRotation.TwoQ: angle = 180; offset.Set(-0.5f, 0, 0.5f); break;
         }
 
-        Transform t = Instantiate(GroundOuterPrefab).transform;
+        Transform t = Instantiate(_prefabs.GroundOuterPrefab).transform;
         t.Rotate(Vector3.up, angle, Space.Self);
         t.SetParent(CornerAndMeshParent);
         t.localPosition = offset;
@@ -180,7 +199,7 @@ public class IslandController : MonoBehaviour
             case CornerRotation.ZeroQ: angle = 180; offset.Set(-0.5f, 0, 0.5f); break;
         }
 
-        Transform t = Instantiate(GroundInnerPrefab).transform;
+        Transform t = Instantiate(_prefabs.GroundInnerPrefab).transform;
         t.Rotate(Vector3.up, angle, Space.Self);
         t.SetParent(CornerAndMeshParent);
         t.localPosition = offset;
@@ -199,7 +218,7 @@ public class IslandController : MonoBehaviour
             case CornerRotation.ThreeQ: angle = 180; offset.Set(-0.5f, 0, 0.5f); break;
         }
 
-        Transform t = Instantiate(GroundStraightPrefab).transform;
+        Transform t = Instantiate(_prefabs.GroundStraightPrefab).transform;
         t.Rotate(Vector3.up, angle, Space.Self);
         t.SetParent(CornerAndMeshParent);
         t.localPosition = offset;
@@ -211,7 +230,7 @@ public class IslandController : MonoBehaviour
         Vector3 offset = Vector3.zero;
         float angle = 0;
 
-        Transform t = Instantiate(GroundFlatPrefab).transform;
+        Transform t = Instantiate(_prefabs.GroundFlatPrefab).transform;
         t.Rotate(Vector3.up, angle, Space.Self);
         t.SetParent(CornerAndMeshParent);
         t.localPosition = offset;
@@ -382,7 +401,7 @@ public class IslandController : MonoBehaviour
 
         float small = 0.5f;
         float large = 1;
-        Vector3 basis = nw.transform.localPosition - transform.localPosition;
+        Vector3 basis = nw.transform.localPosition;
         basis.y = 0.51f;
         basis.z -= 0.5f;
 
@@ -401,13 +420,13 @@ public class IslandController : MonoBehaviour
         switch (type)
         {
             case Tile.TileType.Food:
-                return Instantiate(FoodPrefab).GetComponent<Tile>();
+                return Instantiate(_prefabs.FoodPrefab).GetComponent<Tile>();
             case Tile.TileType.Mountain:
-                return Instantiate(MountainPrefab).GetComponent<Tile>();
+                return Instantiate(_prefabs.MountainPrefab).GetComponent<Tile>();
             case Tile.TileType.Ground:
-                return Instantiate(GroundPrefab).GetComponent<Tile>();
+                return Instantiate(_prefabs.GroundPrefab).GetComponent<Tile>();
             default:
-                return Instantiate(AirPrefab).GetComponent<Tile>();
+                return Instantiate(_prefabs.AirPrefab).GetComponent<Tile>();
         }
     }
     
@@ -450,15 +469,13 @@ public class IslandController : MonoBehaviour
 
     #endregion
 
-    private int _tileLayer;
-
     void FixedUpdate()
     {
         HighlightedTile = null;
         if (TiltController.MainCamera != null)
         {
             Ray ray = TiltController.MainCamera.ScreenPointToRay(Input.mousePosition);
-            Physics.Raycast(ray, out _mouseHit, 1000);//, _tileLayer);
+            Physics.Raycast(ray, out _mouseHit, float.PositiveInfinity, ~_tileLayer);
             if (_mouseHit.collider != null)
             {
                 HighlightedTile = _mouseHit.collider.GetComponent<Tile>();
@@ -468,27 +485,33 @@ public class IslandController : MonoBehaviour
         #region Editor
         if (Application.isEditor)
         {
+            CornerAndMeshParent.position = TilesParent.position;
+
             // resizing
-            Width = Width < 1 ? 1 : Width;
-            Height = Height < 1 ? 1 : Height;
+            Width = Width < 3 ? 3 : Width;
+            Height = Height < 3 ? 3 : Height;
             
             bool dirty = false;
-            while (transform.childCount < Width)
+            while (TilesParent.childCount < Width)
             {
-                var go = new GameObject("Column " + transform.childCount);
-                go.transform.SetParent(transform);
+                var go = new GameObject("Column " + TilesParent.childCount);
+                go.transform.SetParent(TilesParent);
+                go.transform.localPosition = Vector3.zero;
+                go.layer = _tileLayer;
                 dirty = true;
             }
-            while (transform.childCount > Width)
+            while (TilesParent.childCount > Width)
             {
-                DestroyImmediate(transform.GetChild(transform.childCount - 1).gameObject, false);
+                DestroyImmediate(TilesParent.GetChild(TilesParent.childCount - 1).gameObject, false);
                 dirty = true;
             }
-            if (dirty || transform.GetChild(0).childCount != Height)
+            for(int x = 0; x < Width; ++x)
+                TilesParent.GetChild(x).localPosition = Vector3.zero;
+            if (dirty || TilesParent.GetChild(0).childCount != Height)
             {
-                for (int x = 0; x < transform.childCount; ++x)
+                for (int x = 0; x < TilesParent.childCount; ++x)
                 {
-                    Transform column = transform.GetChild(x);
+                    Transform column = TilesParent.GetChild(x);
                     while (column.childCount < Height)
                     {
                         int y = column.childCount;
@@ -498,7 +521,7 @@ public class IslandController : MonoBehaviour
                         pos.x = x;
                         pos.z = y;
                         t.transform.localPosition = pos;
-                        t.gameObject.name = "Tile " + y + ": " + t.Type.ToString();
+                        t.gameObject.name = "Tile " + x + "," + y + ": " + t.Type.ToString();
                     }
                     while (column.childCount > Height)
                     {
@@ -516,6 +539,29 @@ public class IslandController : MonoBehaviour
             }
         }
         #endregion
+
+        _timeUntilMeteor -= Time.fixedDeltaTime;
+        if (_timeUntilMeteor <= 0)
+        {
+            _timeUntilMeteor += MeteorTimeInterval;
+            Tile site = null;
+            for (int i = 0; i < _meteorPositions.Count; ++i)
+            {
+                _lastMeteorIndex = (_lastMeteorIndex + 1) % _meteorPositions.Count;
+                Vector3 newMeteorPos = _meteorPositions[_lastMeteorIndex];
+                int x = (int)newMeteorPos.x;
+                int y = (int)newMeteorPos.z;
+                if (x < 0 || x >= Width || y < 0 || y >= Height)
+                    continue;
+                site = _allTiles[x, y];
+                if (site.Type == Tile.TileType.Ground)
+                    break;
+                else
+                    site = null;
+            }
+            if (site != null)
+                ReplaceTile(site, Tile.TileType.Meteor);
+        }
         
         if (Input.GetMouseButton(0))
         {
@@ -543,7 +589,7 @@ public class IslandController : MonoBehaviour
             }
             _isSelecting = false;
         }
-
+        
         if (_selectedAgents.Count > 0 && HighlightedTile != null && Input.GetMouseButton(1))
         {
             foreach (var agent in _selectedAgents)

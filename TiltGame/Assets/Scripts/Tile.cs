@@ -10,10 +10,14 @@ public class Tile : MonoBehaviour
         Ground,
         Air,
         Mountain,
-        Food
+        Food, 
+        Meteor, 
+        Magnet, 
     }
 
     public TileType Type;
+
+    public Tile ChildTile;
 
     public float Mass;
     
@@ -24,6 +28,8 @@ public class Tile : MonoBehaviour
         foreach (var corner in Corners)
             if (corner != null)
                 Destroy(corner.gameObject);
+        if (ChildTile != null)
+            Destroy(ChildTile);
     }
 
 }
