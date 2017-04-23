@@ -1,7 +1,7 @@
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2008
-
-Project("{ABC5C4F1-71D0-D356-2981-7E0135FB637B}") = "TiltGame", "Assembly-CSharp.csproj", "{2B473EC8-0E1F-0ECC-0312-1ED8910C5BF2}"
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2015
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TiltGame", "TiltGame.csproj", "{F49033A7-D038-44DF-FA46-DBCE65F26B7B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -9,15 +9,12 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{2B473EC8-0E1F-0ECC-0312-1ED8910C5BF2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2B473EC8-0E1F-0ECC-0312-1ED8910C5BF2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2B473EC8-0E1F-0ECC-0312-1ED8910C5BF2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2B473EC8-0E1F-0ECC-0312-1ED8910C5BF2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F49033A7-D038-44DF-FA46-DBCE65F26B7B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F49033A7-D038-44DF-FA46-DBCE65F26B7B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F49033A7-D038-44DF-FA46-DBCE65F26B7B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F49033A7-D038-44DF-FA46-DBCE65F26B7B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(MonoDevelopProperties) = preSolution
-		StartupItem = Assembly-CSharp.csproj
 	EndGlobalSection
 EndGlobal
