@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class Tile : MonoBehaviour
 {
@@ -15,18 +16,14 @@ public class Tile : MonoBehaviour
     public TileType Type;
 
     public float Mass;
-
-    public TileCorner NW { get; set; }
-    public TileCorner SW { get; set; }
-    public TileCorner SE { get; set; }
-    public TileCorner NE { get; set; }
+    
+    public List<Transform> Corners = new List<Transform>();
 
     private void OnDestroy()
     {
-        if (NW != null) { Destroy(NW.gameObject); }
-        if (SW != null) { Destroy(SW.gameObject); }
-        if (SE != null) { Destroy(SE.gameObject); }
-        if (NE != null) { Destroy(NE.gameObject); }
+        foreach (var corner in Corners)
+            if (corner != null)
+                Destroy(corner.gameObject);
     }
 
 }

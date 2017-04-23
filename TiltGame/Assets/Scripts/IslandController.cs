@@ -49,8 +49,8 @@ public class IslandController : MonoBehaviour
 
     private void OnEnable()
     {
-        CornerAndMeshParent.position = Vector3.up;
-        //CornerAndMeshParent.position = transform.position;
+        CornerAndMeshParent.position = transform.position;
+        _tileLayer = LayerMask.NameToLayer("Tile");
 
         foreach (var spawn in AgentSpawns.GetComponentsInChildren<Transform>())
         {
@@ -382,17 +382,16 @@ public class IslandController : MonoBehaviour
 
         float small = 0.5f;
         float large = 1;
-        Vector3 basis = nw.transform.localPosition;
+        Vector3 basis = nw.transform.localPosition - transform.localPosition;
+        basis.y = 0.51f;
+        basis.z -= 0.5f;
 
-        if (nwCorner != null) nwCorner.transform.Translate(basis + new Vector3(small, 0, small), Space.World);
-        if (neCorner != null) neCorner.transform.Translate(basis + new Vector3(large, 0, small), Space.World);
-        if (swCorner != null) swCorner.transform.Translate(basis + new Vector3(small, 0, large), Space.World);
-        if (seCorner != null) seCorner.transform.Translate(basis + new Vector3(large, 0, large), Space.World);
+        if (nwCorner != null) { nwCorner.transform.Translate(basis + new Vector3(small, 0, small), Space.World); nw.Corners.Add(nwCorner); ne.Corners.Add(nwCorner); se.Corners.Add(nwCorner); sw.Corners.Add(nwCorner); }
+        if (neCorner != null) { neCorner.transform.Translate(basis + new Vector3(large, 0, small), Space.World); nw.Corners.Add(neCorner); ne.Corners.Add(neCorner); se.Corners.Add(neCorner); sw.Corners.Add(neCorner); }
+        if (swCorner != null) { swCorner.transform.Translate(basis + new Vector3(small, 0, large), Space.World); nw.Corners.Add(swCorner); ne.Corners.Add(swCorner); se.Corners.Add(swCorner); sw.Corners.Add(swCorner); }
+        if (seCorner != null) { seCorner.transform.Translate(basis + new Vector3(large, 0, large), Space.World); nw.Corners.Add(seCorner); ne.Corners.Add(seCorner); se.Corners.Add(seCorner); sw.Corners.Add(seCorner); }
 
-        nw.SE = nwCorner == null ? null : nwCorner.GetComponent<TileCorner>();
-        ne.SW = neCorner == null ? null : neCorner.GetComponent<TileCorner>();
-        se.NW = seCorner == null ? null : seCorner.GetComponent<TileCorner>();
-        sw.NE = swCorner == null ? null : swCorner.GetComponent<TileCorner>();
+        
     }
     
     #endregion
@@ -430,35 +429,36 @@ public class IslandController : MonoBehaviour
         newTile.transform.localPosition = pos;
         newTile.gameObject.name = "Tile " + y + ": " + newType.ToString();
         _allTiles[x, y] = newTile;
-        RefreshCorners();
-        //for (int i = x; i <= x + 1; ++i)
-        //{
-        //    if (i <= 0 || i >= Width)
-        //        continue;
-        //    for (int j = y; j <= y + 1; ++j)
-        //    {
-        //        if (j <= 0 || j >= Height)
-        //            continue;
-        //
-        //        RefreshSingleCorner(
-        //            _allTiles[i - 1, j - 1], 
-        //            _allTiles[i - 1, j], 
-        //            _allTiles[i, j], 
-        //            _allTiles[i, j - 1]);
-        //    }
-        //}
+        for (int i = x; i <= x + 1; ++i)
+        {
+            if (i <= 0 || i >= Width)
+                continue;
+            for (int j = y; j <= y + 1; ++j)
+            {
+                if (j <= 0 || j >= Height)
+                    continue;
+        
+                RefreshSingleCorner(
+                    _allTiles[i - 1, j - 1], 
+                    _allTiles[i - 1, j], 
+                    _allTiles[i, j], 
+                    _allTiles[i, j - 1]);
+            }
+        }
         return newTile;
     }
 
     #endregion
-    
+
+    private int _tileLayer;
+
     void FixedUpdate()
     {
         HighlightedTile = null;
         if (TiltController.MainCamera != null)
         {
             Ray ray = TiltController.MainCamera.ScreenPointToRay(Input.mousePosition);
-            Physics.Raycast(ray, out _mouseHit);//, 1000, LayerMask.NameToLayer("Tile"));
+            Physics.Raycast(ray, out _mouseHit, 1000);//, _tileLayer);
             if (_mouseHit.collider != null)
             {
                 HighlightedTile = _mouseHit.collider.GetComponent<Tile>();
