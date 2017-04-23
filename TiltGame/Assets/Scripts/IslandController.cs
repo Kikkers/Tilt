@@ -540,6 +540,7 @@ public class IslandController : MonoBehaviour
         }
         #endregion
 
+        // meteors
         _timeUntilMeteor -= Time.fixedDeltaTime;
         if (_timeUntilMeteor <= 0)
         {
@@ -559,10 +560,17 @@ public class IslandController : MonoBehaviour
                 else
                     site = null;
             }
+
             if (site != null)
-                ReplaceTile(site, Tile.TileType.Meteor);
+            {
+                site = ReplaceTile(site, Tile.TileType.Meteor);
+                site.DoImpact();
+                foreach (var agent in _agents)
+                    agent.DoImpact(10, 100);
+            }
         }
         
+        // agent control
         if (Input.GetMouseButton(0))
         {
             if (!_isSelecting)
@@ -589,7 +597,6 @@ public class IslandController : MonoBehaviour
             }
             _isSelecting = false;
         }
-        
         if (_selectedAgents.Count > 0 && HighlightedTile != null && Input.GetMouseButton(1))
         {
             foreach (var agent in _selectedAgents)
@@ -600,4 +607,6 @@ public class IslandController : MonoBehaviour
 
         RecalculateMass();
     }
+
+
 }

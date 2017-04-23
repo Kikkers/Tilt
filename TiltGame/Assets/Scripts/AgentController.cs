@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -33,18 +34,40 @@ public class AgentController : MonoBehaviour
         }
 
         // determine teetering
-        NavMeshHit hit;
-        _navAgent.FindClosestEdge(out hit);
-        if (hit.distance != 0)
-            _teeteringTime = 0;
-        else
-        {
-            _teeteringTime += Time.fixedDeltaTime;
-        }
+        //NavMeshHit hit;
+        //_navAgent.FindClosestEdge(out hit);
+        //if (hit.distance != 0)
+        //    _teeteringTime = 0;
+        //else
+        //{
+        //    _teeteringTime += Time.fixedDeltaTime;
+        //}
     }
 
     internal void SetDestination(Tile tile)
     {
-        _navAgent.SetDestination(tile.transform.position);
+        if (_navAgent.enabled)
+            _navAgent.SetDestination(tile.transform.position);
     }
+
+    internal void DoImpact(float impactMin, float impactMult)
+    {
+        _navAgent.enabled = false;
+        var deltaCenter = owner.Pivot.position - transform.position;
+        deltaCenter.y = 0;
+        _body.AddForce(Vector3.up * (deltaCenter.magnitude * impactMult + impactMin));
+        StartCoroutine(AgentEnabler());
+    }
+
+    private IEnumerator AgentEnabler()
+    {
+        int num = 0;
+        do
+        {
+            yield return new WaitForFixedUpdate();
+            num++;
+        } while (transform.localPosition.y > -0.49f);
+        _navAgent.enabled = true;
+    }
+
 }

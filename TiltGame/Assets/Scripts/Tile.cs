@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Tile : MonoBehaviour
@@ -19,8 +20,27 @@ public class Tile : MonoBehaviour
 
     public Tile ChildTile;
 
-    public float Mass;
-    
+    [SerializeField] private float _mass;
+    public float Mass { get { return _mass + _impactExtraMass; } }
+
+    private float _impactExtraMass = 0;
+
+    public void DoImpact()
+    {
+        _impactExtraMass = 100;
+        StartCoroutine(MassRestore());
+    }
+
+    private IEnumerator MassRestore()
+    {
+        for (int i = 0; i < 50; ++i)
+        {
+            yield return new WaitForFixedUpdate();
+            _impactExtraMass = _impactExtraMass * 0.8f;
+        }
+        _impactExtraMass = 0;
+    }
+
     public List<Transform> Corners = new List<Transform>();
 
     private void OnDestroy()
