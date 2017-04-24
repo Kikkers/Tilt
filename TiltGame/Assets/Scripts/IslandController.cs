@@ -11,6 +11,9 @@ public class IslandController : MonoBehaviour
     public Transform COMIndicator;
     public Transform CornerAndMeshParent;
     public Transform TilesParent;
+    public Transform MeteorShadow;
+    public Light DirLight;
+    public RectTransform GUIParent;
 
     [Space]
 
@@ -29,17 +32,21 @@ public class IslandController : MonoBehaviour
     [Serializable]
     private class Prefabs
     {
+        public GameObject HealthbarPrefab = null;
         public GameObject AgentPrefab = null;
+        [Space]
         public GameObject AirPrefab = null;
         public GameObject GroundPrefab = null;
         public GameObject MountainPrefab = null;
         public GameObject FoodPrefab = null;
-
+        public GameObject MagnetPrefab = null;
+        public GameObject MeteorPrefab = null;
+        [Space]
         public GameObject GroundStraightPrefab = null;
         public GameObject GroundInnerPrefab = null;
         public GameObject GroundOuterPrefab = null;
         public GameObject GroundFlatPrefab = null;
-
+        [Space]
         public GameObject ArtFoodPrefab = null;
         public GameObject ArtMountainPrefab = null;
         public GameObject ArtMeteorPrefab = null;
@@ -61,6 +68,7 @@ public class IslandController : MonoBehaviour
     private List<Vector3> _meteorPositions = new List<Vector3>();
     private int _lastMeteorIndex = -1;
     private float _timeUntilMeteor;
+    private Tile _nextMeteorSite;
     private bool _isSelecting;
     private Vector3 _selectStart;
     private List<AgentController> _agents = new List<AgentController>();
@@ -91,6 +99,9 @@ public class IslandController : MonoBehaviour
             agent.transform.rotation = spawn.rotation;
             agent.owner = this;
             _agents.Add(agent);
+            Healthbar bar = Instantiate(_prefabs.HealthbarPrefab).GetComponent<Healthbar>();
+            bar.transform.SetParent(GUIParent);
+            bar.Initialize(agent, TiltController.MainCamera);
         }
     }
     
@@ -425,6 +436,10 @@ public class IslandController : MonoBehaviour
                 return Instantiate(_prefabs.MountainPrefab).GetComponent<Tile>();
             case Tile.TileType.Ground:
                 return Instantiate(_prefabs.GroundPrefab).GetComponent<Tile>();
+            case Tile.TileType.Magnet:
+                return Instantiate(_prefabs.MagnetPrefab).GetComponent<Tile>();
+            case Tile.TileType.Meteor:
+                return Instantiate(_prefabs.MeteorPrefab).GetComponent<Tile>();
             default:
                 return Instantiate(_prefabs.AirPrefab).GetComponent<Tile>();
         }
@@ -541,32 +556,51 @@ public class IslandController : MonoBehaviour
         #endregion
 
         // meteors
-        _timeUntilMeteor -= Time.fixedDeltaTime;
-        if (_timeUntilMeteor <= 0)
+        if (_nextMeteorSite == null)
         {
-            _timeUntilMeteor += MeteorTimeInterval;
-            Tile site = null;
-            for (int i = 0; i < _meteorPositions.Count; ++i)
+            DirLight.shadowStrength = 0;
+            if (_allTiles != null)
             {
-                _lastMeteorIndex = (_lastMeteorIndex + 1) % _meteorPositions.Count;
-                Vector3 newMeteorPos = _meteorPositions[_lastMeteorIndex];
-                int x = (int)newMeteorPos.x;
-                int y = (int)newMeteorPos.z;
-                if (x < 0 || x >= Width || y < 0 || y >= Height)
-                    continue;
-                site = _allTiles[x, y];
-                if (site.Type == Tile.TileType.Ground)
-                    break;
-                else
-                    site = null;
+                for (int i = 0; i < _meteorPositions.Count; ++i)
+                {
+                    _lastMeteorIndex = (_lastMeteorIndex + 1) % _meteorPositions.Count;
+                    Vector3 newMeteorPos = _meteorPositions[_lastMeteorIndex];
+                    int x = (int)newMeteorPos.x;
+                    int y = (int)newMeteorPos.z;
+                    if (x < 0 || x >= Width || y < 0 || y >= Height)
+                        continue;
+                    _nextMeteorSite = _allTiles[x, y];
+                    if (_nextMeteorSite.Type == Tile.TileType.Ground)
+                    {
+                        var pos = _nextMeteorSite.transform.position;
+                        pos.y = 20;
+                        MeteorShadow.transform.position = pos;
+                        break;
+                    }
+                    else
+                        _nextMeteorSite = null;
+                }
             }
-
-            if (site != null)
+        }
+        else
+        {
+            _timeUntilMeteor -= Time.fixedDeltaTime;
+            if (_timeUntilMeteor <= 0)
             {
-                site = ReplaceTile(site, Tile.TileType.Meteor);
+                _timeUntilMeteor += MeteorTimeInterval;
+                Tile site = ReplaceTile(_nextMeteorSite, Tile.TileType.Meteor);
+                _nextMeteorSite = null;
+                DirLight.shadowStrength = 0;
                 site.DoImpact();
                 foreach (var agent in _agents)
                     agent.DoImpact(10, 100);
+            }
+            else
+            {
+                float progress = _timeUntilMeteor / MeteorTimeInterval;
+                DirLight.shadowStrength = 1 - Mathf.Sqrt(progress);
+                MeteorShadow.transform.localScale = Vector3.one * (progress * 3 + 1);
+
             }
         }
         

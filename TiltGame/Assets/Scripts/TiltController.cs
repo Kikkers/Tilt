@@ -9,9 +9,15 @@ public class TiltController : MonoBehaviour
     
     public static Camera MainCamera { get; private set; }
 
-    void Update()
+    private Vector3 _dampenedOffset = Vector3.zero;
+
+    private void Awake()
     {
         MainCamera = _mainCamera;
+    }
+
+    void Update()
+    {
         transform.localRotation = Quaternion.identity;
         if (ActiveIsland != null)
         {   
@@ -21,8 +27,9 @@ public class TiltController : MonoBehaviour
             float mag = offset.magnitude;
             if (mag > tiltMax)
                 offset = offset.normalized * tiltMax;
-            
-            transform.localRotation = Quaternion.Euler(-offset.z, 0, offset.x);
+
+            _dampenedOffset = _dampenedOffset * 0.8f + offset * 0.2f;
+            transform.localRotation = Quaternion.Euler(-_dampenedOffset.z, 0, _dampenedOffset.x);
         }
     }
 }

@@ -27,7 +27,7 @@ public class Tile : MonoBehaviour
 
     public void DoImpact()
     {
-        _impactExtraMass = 100;
+        _impactExtraMass = 1000;
         StartCoroutine(MassRestore());
     }
 
@@ -36,11 +36,11 @@ public class Tile : MonoBehaviour
         for (int i = 0; i < 50; ++i)
         {
             yield return new WaitForFixedUpdate();
-            _impactExtraMass = _impactExtraMass * 0.8f;
+            _impactExtraMass = _impactExtraMass * 0.9f;
         }
         _impactExtraMass = 0;
     }
-
+    
     public List<Transform> Corners = new List<Transform>();
 
     private void OnDestroy()

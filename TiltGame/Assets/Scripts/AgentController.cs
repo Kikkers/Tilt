@@ -10,11 +10,15 @@ public class AgentController : MonoBehaviour
 
     private Rigidbody _body;
     private NavMeshAgent _navAgent;
+    private Vector3 _lastPos;
 
-    public float Mass;
+    public float Stamina = 1;
+    public float MaxSpeed = 1;
+    public float handicap;
 
-    [SerializeField] private float _teeteringTime;
-
+    [SerializeField] private float _mass;
+    public float Mass { get { return _navAgent.enabled ? _mass : 0; } }
+    
     private TiltController _tiltController;
 
     void Awake()
@@ -26,12 +30,29 @@ public class AgentController : MonoBehaviour
 
     void FixedUpdate()
     {
+        var vector = Vector3.zero;
         if (owner != null)
         {
-            var vector = owner.COMPivotOffset;
+            vector = owner.COMPivotOffset;
             vector.y = 0;
             _body.AddForce(vector);
         }
+
+        if (_navAgent.enabled)
+        {   
+            var pos = transform.position;
+            var delta = pos - _lastPos;
+            float downwards = Vector3.Dot(vector.normalized, _navAgent.velocity.normalized);
+            if (float.IsNaN(downwards)) downwards = 0;
+            float energyLost = Mathf.Max(-downwards * delta.magnitude * 0.05f, 0);
+            Stamina -= energyLost;
+
+            downwards = Mathf.Max(0, downwards);
+            handicap = Mathf.Clamp(Stamina + downwards, 0, 1);
+            _navAgent.speed = 0.01f + MaxSpeed * handicap;
+            //_navAgent.velocity = _navAgent.velocity * handicap;
+        }
+        _lastPos = transform.position;
 
         // determine teetering
         //NavMeshHit hit;
