@@ -51,6 +51,7 @@
      <Compile Include="Assets\Scripts\RtsCamera.cs" />
      <Compile Include="Assets\Scripts\Tile.cs" />
      <Compile Include="Assets\Scripts\TiltController.cs" />
+     <None Include="Assets\Shaders\TilingGrass.shader" />
  <Reference Include="UnityEngine.Advertisements">
  <HintPath>D:/Unity/Editor/Data/UnityExtensions/Unity/Advertisements/UnityEngine.Advertisements.dll</HintPath>
  </Reference>
