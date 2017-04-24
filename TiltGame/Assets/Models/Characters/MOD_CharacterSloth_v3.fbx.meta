@@ -1,0 +1,535 @@
+fileFormatVersion: 2
+guid: 662b5182205f3524895ce081e52132cf
+timeCreated: 1493025135
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: JOINT_BackLower
+    100002: JOINT_BackMiddle
+    100004: JOINT_BackUpper
+    100006: JOINT_ElbowLeft
+    100008: JOINT_ElbowRight
+    100010: JOINT_EyeLeft
+    100012: JOINT_EyeRight
+    100014: JOINT_FingersLeft
+    100016: JOINT_FingersRight
+    100018: JOINT_Head
+    100020: JOINT_HIP
+    100022: JOINT_LegAnkleLeft
+    100024: JOINT_LegAnkleRight
+    100026: JOINT_LegLowerLeft
+    100028: JOINT_LegLowerRight
+    100030: JOINT_LegToesLeft
+    100032: JOINT_LegToesRight
+    100034: JOINT_LegUpperLeft
+    100036: JOINT_LegUpperRight
+    100038: JOINT_Root1
+    100040: JOINT_ShoulderLeft
+    100042: JOINT_ShoulderRight
+    100044: JOINT_WristLeft
+    100046: JOINT_WristRight
+    100048: //RootNode
+    100050: MOD_CharacterSlothMesh
+    400000: JOINT_BackLower
+    400002: JOINT_BackMiddle
+    400004: JOINT_BackUpper
+    400006: JOINT_ElbowLeft
+    400008: JOINT_ElbowRight
+    400010: JOINT_EyeLeft
+    400012: JOINT_EyeRight
+    400014: JOINT_FingersLeft
+    400016: JOINT_FingersRight
+    400018: JOINT_Head
+    400020: JOINT_HIP
+    400022: JOINT_LegAnkleLeft
+    400024: JOINT_LegAnkleRight
+    400026: JOINT_LegLowerLeft
+    400028: JOINT_LegLowerRight
+    400030: JOINT_LegToesLeft
+    400032: JOINT_LegToesRight
+    400034: JOINT_LegUpperLeft
+    400036: JOINT_LegUpperRight
+    400038: JOINT_Root1
+    400040: JOINT_ShoulderLeft
+    400042: JOINT_ShoulderRight
+    400044: JOINT_WristLeft
+    400046: JOINT_WristRight
+    400048: //RootNode
+    400050: MOD_CharacterSlothMesh
+    4300000: MOD_CharacterSlothMesh
+    7400000: All animations
+    7400002: Idle
+    7400004: Gather
+    7400006: Fall
+    7400008: Walk
+    9500000: //RootNode
+    13700000: MOD_CharacterSlothMesh
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: All animations
+      takeName: Take 001
+      firstFrame: 1
+      lastFrame: 271
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: JOINT_Root1
+        weight: 1
+      - path: JOINT_Root1/JOINT_HIP
+        weight: 1
+      - path: JOINT_Root1/JOINT_HIP/JOINT_BackLower
+        weight: 1
+      - path: JOINT_Root1/JOINT_HIP/JOINT_BackLower/JOINT_BackMiddle
+        weight: 1
+      - path: JOINT_Root1/JOINT_HIP/JOINT_BackLower/JOINT_BackMiddle/JOINT_BackUpper
+        weight: 1
+      - path: JOINT_Root1/JOINT_HIP/JOINT_BackLower/JOINT_BackMiddle/JOINT_BackUpper/JOINT_Head
+        weight: 1
+      - path: JOINT_Root1/JOINT_HIP/JOINT_BackLower/JOINT_BackMiddle/JOINT_BackUpper/JOINT_Head/JOINT_EyeLeft
+        weight: 1
+      - path: JOINT_Root1/JOINT_HIP/JOINT_BackLower/JOINT_BackMiddle/JOINT_BackUpper/JOINT_Head/JOINT_EyeRight
+        weight: 1
+      - path: JOINT_Root1/JOINT_HIP/JOINT_BackLower/JOINT_BackMiddle/JOINT_BackUpper/JOINT_ShoulderLeft
+        weight: 1
+      - path: JOINT_Root1/JOINT_HIP/JOINT_BackLower/JOINT_BackMiddle/JOINT_BackUpper/JOINT_ShoulderLeft/JOINT_ElbowLeft
+        weight: 1
+      - path: JOINT_Root1/JOINT_HIP/JOINT_BackLower/JOINT_BackMiddle/JOINT_BackUpper/JOINT_ShoulderLeft/JOINT_ElbowLeft/JOINT_WristLeft
+        weight: 1
+      - path: JOINT_Root1/JOINT_HIP/JOINT_BackLower/JOINT_BackMiddle/JOINT_BackUpper/JOINT_ShoulderLeft/JOINT_ElbowLeft/JOINT_WristLeft/JOINT_FingersLeft
+        weight: 1
+      - path: JOINT_Root1/JOINT_HIP/JOINT_BackLower/JOINT_BackMiddle/JOINT_BackUpper/JOINT_ShoulderRight
+        weight: 1
+      - path: JOINT_Root1/JOINT_HIP/JOINT_BackLower/JOINT_BackMiddle/JOINT_BackUpper/JOINT_ShoulderRight/JOINT_ElbowRight
+        weight: 1
+      - path: JOINT_Root1/JOINT_HIP/JOINT_BackLower/JOINT_BackMiddle/JOINT_BackUpper/JOINT_ShoulderRight/JOINT_ElbowRight/JOINT_WristRight
+        weight: 1
+      - path: JOINT_Root1/JOINT_HIP/JOINT_BackLower/JOINT_BackMiddle/JOINT_BackUpper/JOINT_ShoulderRight/JOINT_ElbowRight/JOINT_WristRight/JOINT_FingersRight
+        weight: 1
+      - path: JOINT_Root1/JOINT_HIP/JOINT_LegUpperLeft
+        weight: 1
+      - path: JOINT_Root1/JOINT_HIP/JOINT_LegUpperLeft/JOINT_LegLowerLeft
+        weight: 1
+      - path: JOINT_Root1/JOINT_HIP/JOINT_LegUpperLeft/JOINT_LegLowerLeft/JOINT_LegAnkleLeft
+        weight: 1
+      - path: JOINT_Root1/JOINT_HIP/JOINT_LegUpperLeft/JOINT_LegLowerLeft/JOINT_LegAnkleLeft/JOINT_LegToesLeft
+        weight: 1
+      - path: JOINT_Root1/JOINT_HIP/JOINT_LegUpperRight
+        weight: 1
+      - path: JOINT_Root1/JOINT_HIP/JOINT_LegUpperRight/JOINT_LegLowerRight
+        weight: 1
+      - path: JOINT_Root1/JOINT_HIP/JOINT_LegUpperRight/JOINT_LegLowerRight/JOINT_LegAnkleRight
+        weight: 1
+      - path: JOINT_Root1/JOINT_HIP/JOINT_LegUpperRight/JOINT_LegLowerRight/JOINT_LegAnkleRight/JOINT_LegToesRight
+        weight: 1
+      - path: MOD_CharacterSlothMesh
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Idle
+      takeName: Take 001
+      firstFrame: 0
+      lastFrame: 60
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: JOINT_Root1
+        weight: 1
+      - path: JOINT_Root1/JOINT_HIP
+        weight: 1
+      - path: JOINT_Root1/JOINT_HIP/JOINT_BackLower
+        weight: 1
+      - path: JOINT_Root1/JOINT_HIP/JOINT_BackLower/JOINT_BackMiddle
+        weight: 1
+      - path: JOINT_Root1/JOINT_HIP/JOINT_BackLower/JOINT_BackMiddle/JOINT_BackUpper
+        weight: 1
+      - path: JOINT_Root1/JOINT_HIP/JOINT_BackLower/JOINT_BackMiddle/JOINT_BackUpper/JOINT_Head
+        weight: 1
+      - path: JOINT_Root1/JOINT_HIP/JOINT_BackLower/JOINT_BackMiddle/JOINT_BackUpper/JOINT_Head/JOINT_EyeLeft
+        weight: 1
+      - path: JOINT_Root1/JOINT_HIP/JOINT_BackLower/JOINT_BackMiddle/JOINT_BackUpper/JOINT_Head/JOINT_EyeRight
+        weight: 1
+      - path: JOINT_Root1/JOINT_HIP/JOINT_BackLower/JOINT_BackMiddle/JOINT_BackUpper/JOINT_ShoulderLeft
+        weight: 1
+      - path: JOINT_Root1/JOINT_HIP/JOINT_BackLower/JOINT_BackMiddle/JOINT_BackUpper/JOINT_ShoulderLeft/JOINT_ElbowLeft
+        weight: 1
+      - path: JOINT_Root1/JOINT_HIP/JOINT_BackLower/JOINT_BackMiddle/JOINT_BackUpper/JOINT_ShoulderLeft/JOINT_ElbowLeft/JOINT_WristLeft
+        weight: 1
+      - path: JOINT_Root1/JOINT_HIP/JOINT_BackLower/JOINT_BackMiddle/JOINT_BackUpper/JOINT_ShoulderLeft/JOINT_ElbowLeft/JOINT_WristLeft/JOINT_FingersLeft
+        weight: 1
+      - path: JOINT_Root1/JOINT_HIP/JOINT_BackLower/JOINT_BackMiddle/JOINT_BackUpper/JOINT_ShoulderRight
+        weight: 1
+      - path: JOINT_Root1/JOINT_HIP/JOINT_BackLower/JOINT_BackMiddle/JOINT_BackUpper/JOINT_ShoulderRight/JOINT_ElbowRight
+        weight: 1
+      - path: JOINT_Root1/JOINT_HIP/JOINT_BackLower/JOINT_BackMiddle/JOINT_BackUpper/JOINT_ShoulderRight/JOINT_ElbowRight/JOINT_WristRight
+        weight: 1
+      - path: JOINT_Root1/JOINT_HIP/JOINT_BackLower/JOINT_BackMiddle/JOINT_BackUpper/JOINT_ShoulderRight/JOINT_ElbowRight/JOINT_WristRight/JOINT_FingersRight
+        weight: 1
+      - path: JOINT_Root1/JOINT_HIP/JOINT_LegUpperLeft
+        weight: 1
+      - path: JOINT_Root1/JOINT_HIP/JOINT_LegUpperLeft/JOINT_LegLowerLeft
+        weight: 1
+      - path: JOINT_Root1/JOINT_HIP/JOINT_LegUpperLeft/JOINT_LegLowerLeft/JOINT_LegAnkleLeft
+        weight: 1
+      - path: JOINT_Root1/JOINT_HIP/JOINT_LegUpperLeft/JOINT_LegLowerLeft/JOINT_LegAnkleLeft/JOINT_LegToesLeft
+        weight: 1
+      - path: JOINT_Root1/JOINT_HIP/JOINT_LegUpperRight
+        weight: 1
+      - path: JOINT_Root1/JOINT_HIP/JOINT_LegUpperRight/JOINT_LegLowerRight
+        weight: 1
+      - path: JOINT_Root1/JOINT_HIP/JOINT_LegUpperRight/JOINT_LegLowerRight/JOINT_LegAnkleRight
+        weight: 1
+      - path: JOINT_Root1/JOINT_HIP/JOINT_LegUpperRight/JOINT_LegLowerRight/JOINT_LegAnkleRight/JOINT_LegToesRight
+        weight: 1
+      - path: MOD_CharacterSlothMesh
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Gather
+      takeName: Take 001
+      firstFrame: 71
+      lastFrame: 130
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: JOINT_Root1
+        weight: 1
+      - path: JOINT_Root1/JOINT_HIP
+        weight: 1
+      - path: JOINT_Root1/JOINT_HIP/JOINT_BackLower
+        weight: 1
+      - path: JOINT_Root1/JOINT_HIP/JOINT_BackLower/JOINT_BackMiddle
+        weight: 1
+      - path: JOINT_Root1/JOINT_HIP/JOINT_BackLower/JOINT_BackMiddle/JOINT_BackUpper
+        weight: 1
+      - path: JOINT_Root1/JOINT_HIP/JOINT_BackLower/JOINT_BackMiddle/JOINT_BackUpper/JOINT_Head
+        weight: 1
+      - path: JOINT_Root1/JOINT_HIP/JOINT_BackLower/JOINT_BackMiddle/JOINT_BackUpper/JOINT_Head/JOINT_EyeLeft
+        weight: 1
+      - path: JOINT_Root1/JOINT_HIP/JOINT_BackLower/JOINT_BackMiddle/JOINT_BackUpper/JOINT_Head/JOINT_EyeRight
+        weight: 1
+      - path: JOINT_Root1/JOINT_HIP/JOINT_BackLower/JOINT_BackMiddle/JOINT_BackUpper/JOINT_ShoulderLeft
+        weight: 1
+      - path: JOINT_Root1/JOINT_HIP/JOINT_BackLower/JOINT_BackMiddle/JOINT_BackUpper/JOINT_ShoulderLeft/JOINT_ElbowLeft
+        weight: 1
+      - path: JOINT_Root1/JOINT_HIP/JOINT_BackLower/JOINT_BackMiddle/JOINT_BackUpper/JOINT_ShoulderLeft/JOINT_ElbowLeft/JOINT_WristLeft
+        weight: 1
+      - path: JOINT_Root1/JOINT_HIP/JOINT_BackLower/JOINT_BackMiddle/JOINT_BackUpper/JOINT_ShoulderLeft/JOINT_ElbowLeft/JOINT_WristLeft/JOINT_FingersLeft
+        weight: 1
+      - path: JOINT_Root1/JOINT_HIP/JOINT_BackLower/JOINT_BackMiddle/JOINT_BackUpper/JOINT_ShoulderRight
+        weight: 1
+      - path: JOINT_Root1/JOINT_HIP/JOINT_BackLower/JOINT_BackMiddle/JOINT_BackUpper/JOINT_ShoulderRight/JOINT_ElbowRight
+        weight: 1
+      - path: JOINT_Root1/JOINT_HIP/JOINT_BackLower/JOINT_BackMiddle/JOINT_BackUpper/JOINT_ShoulderRight/JOINT_ElbowRight/JOINT_WristRight
+        weight: 1
+      - path: JOINT_Root1/JOINT_HIP/JOINT_BackLower/JOINT_BackMiddle/JOINT_BackUpper/JOINT_ShoulderRight/JOINT_ElbowRight/JOINT_WristRight/JOINT_FingersRight
+        weight: 1
+      - path: JOINT_Root1/JOINT_HIP/JOINT_LegUpperLeft
+        weight: 1
+      - path: JOINT_Root1/JOINT_HIP/JOINT_LegUpperLeft/JOINT_LegLowerLeft
+        weight: 1
+      - path: JOINT_Root1/JOINT_HIP/JOINT_LegUpperLeft/JOINT_LegLowerLeft/JOINT_LegAnkleLeft
+        weight: 1
+      - path: JOINT_Root1/JOINT_HIP/JOINT_LegUpperLeft/JOINT_LegLowerLeft/JOINT_LegAnkleLeft/JOINT_LegToesLeft
+        weight: 1
+      - path: JOINT_Root1/JOINT_HIP/JOINT_LegUpperRight
+        weight: 1
+      - path: JOINT_Root1/JOINT_HIP/JOINT_LegUpperRight/JOINT_LegLowerRight
+        weight: 1
+      - path: JOINT_Root1/JOINT_HIP/JOINT_LegUpperRight/JOINT_LegLowerRight/JOINT_LegAnkleRight
+        weight: 1
+      - path: JOINT_Root1/JOINT_HIP/JOINT_LegUpperRight/JOINT_LegLowerRight/JOINT_LegAnkleRight/JOINT_LegToesRight
+        weight: 1
+      - path: MOD_CharacterSlothMesh
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Fall
+      takeName: Take 001
+      firstFrame: 141
+      lastFrame: 200
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: JOINT_Root1
+        weight: 1
+      - path: JOINT_Root1/JOINT_HIP
+        weight: 1
+      - path: JOINT_Root1/JOINT_HIP/JOINT_BackLower
+        weight: 1
+      - path: JOINT_Root1/JOINT_HIP/JOINT_BackLower/JOINT_BackMiddle
+        weight: 1
+      - path: JOINT_Root1/JOINT_HIP/JOINT_BackLower/JOINT_BackMiddle/JOINT_BackUpper
+        weight: 1
+      - path: JOINT_Root1/JOINT_HIP/JOINT_BackLower/JOINT_BackMiddle/JOINT_BackUpper/JOINT_Head
+        weight: 1
+      - path: JOINT_Root1/JOINT_HIP/JOINT_BackLower/JOINT_BackMiddle/JOINT_BackUpper/JOINT_Head/JOINT_EyeLeft
+        weight: 1
+      - path: JOINT_Root1/JOINT_HIP/JOINT_BackLower/JOINT_BackMiddle/JOINT_BackUpper/JOINT_Head/JOINT_EyeRight
+        weight: 1
+      - path: JOINT_Root1/JOINT_HIP/JOINT_BackLower/JOINT_BackMiddle/JOINT_BackUpper/JOINT_ShoulderLeft
+        weight: 1
+      - path: JOINT_Root1/JOINT_HIP/JOINT_BackLower/JOINT_BackMiddle/JOINT_BackUpper/JOINT_ShoulderLeft/JOINT_ElbowLeft
+        weight: 1
+      - path: JOINT_Root1/JOINT_HIP/JOINT_BackLower/JOINT_BackMiddle/JOINT_BackUpper/JOINT_ShoulderLeft/JOINT_ElbowLeft/JOINT_WristLeft
+        weight: 1
+      - path: JOINT_Root1/JOINT_HIP/JOINT_BackLower/JOINT_BackMiddle/JOINT_BackUpper/JOINT_ShoulderLeft/JOINT_ElbowLeft/JOINT_WristLeft/JOINT_FingersLeft
+        weight: 1
+      - path: JOINT_Root1/JOINT_HIP/JOINT_BackLower/JOINT_BackMiddle/JOINT_BackUpper/JOINT_ShoulderRight
+        weight: 1
+      - path: JOINT_Root1/JOINT_HIP/JOINT_BackLower/JOINT_BackMiddle/JOINT_BackUpper/JOINT_ShoulderRight/JOINT_ElbowRight
+        weight: 1
+      - path: JOINT_Root1/JOINT_HIP/JOINT_BackLower/JOINT_BackMiddle/JOINT_BackUpper/JOINT_ShoulderRight/JOINT_ElbowRight/JOINT_WristRight
+        weight: 1
+      - path: JOINT_Root1/JOINT_HIP/JOINT_BackLower/JOINT_BackMiddle/JOINT_BackUpper/JOINT_ShoulderRight/JOINT_ElbowRight/JOINT_WristRight/JOINT_FingersRight
+        weight: 1
+      - path: JOINT_Root1/JOINT_HIP/JOINT_LegUpperLeft
+        weight: 1
+      - path: JOINT_Root1/JOINT_HIP/JOINT_LegUpperLeft/JOINT_LegLowerLeft
+        weight: 1
+      - path: JOINT_Root1/JOINT_HIP/JOINT_LegUpperLeft/JOINT_LegLowerLeft/JOINT_LegAnkleLeft
+        weight: 1
+      - path: JOINT_Root1/JOINT_HIP/JOINT_LegUpperLeft/JOINT_LegLowerLeft/JOINT_LegAnkleLeft/JOINT_LegToesLeft
+        weight: 1
+      - path: JOINT_Root1/JOINT_HIP/JOINT_LegUpperRight
+        weight: 1
+      - path: JOINT_Root1/JOINT_HIP/JOINT_LegUpperRight/JOINT_LegLowerRight
+        weight: 1
+      - path: JOINT_Root1/JOINT_HIP/JOINT_LegUpperRight/JOINT_LegLowerRight/JOINT_LegAnkleRight
+        weight: 1
+      - path: JOINT_Root1/JOINT_HIP/JOINT_LegUpperRight/JOINT_LegLowerRight/JOINT_LegAnkleRight/JOINT_LegToesRight
+        weight: 1
+      - path: MOD_CharacterSlothMesh
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Walk
+      takeName: Take 001
+      firstFrame: 211
+      lastFrame: 270
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: JOINT_Root1
+        weight: 1
+      - path: JOINT_Root1/JOINT_HIP
+        weight: 1
+      - path: JOINT_Root1/JOINT_HIP/JOINT_BackLower
+        weight: 1
+      - path: JOINT_Root1/JOINT_HIP/JOINT_BackLower/JOINT_BackMiddle
+        weight: 1
+      - path: JOINT_Root1/JOINT_HIP/JOINT_BackLower/JOINT_BackMiddle/JOINT_BackUpper
+        weight: 1
+      - path: JOINT_Root1/JOINT_HIP/JOINT_BackLower/JOINT_BackMiddle/JOINT_BackUpper/JOINT_Head
+        weight: 1
+      - path: JOINT_Root1/JOINT_HIP/JOINT_BackLower/JOINT_BackMiddle/JOINT_BackUpper/JOINT_Head/JOINT_EyeLeft
+        weight: 1
+      - path: JOINT_Root1/JOINT_HIP/JOINT_BackLower/JOINT_BackMiddle/JOINT_BackUpper/JOINT_Head/JOINT_EyeRight
+        weight: 1
+      - path: JOINT_Root1/JOINT_HIP/JOINT_BackLower/JOINT_BackMiddle/JOINT_BackUpper/JOINT_ShoulderLeft
+        weight: 1
+      - path: JOINT_Root1/JOINT_HIP/JOINT_BackLower/JOINT_BackMiddle/JOINT_BackUpper/JOINT_ShoulderLeft/JOINT_ElbowLeft
+        weight: 1
+      - path: JOINT_Root1/JOINT_HIP/JOINT_BackLower/JOINT_BackMiddle/JOINT_BackUpper/JOINT_ShoulderLeft/JOINT_ElbowLeft/JOINT_WristLeft
+        weight: 1
+      - path: JOINT_Root1/JOINT_HIP/JOINT_BackLower/JOINT_BackMiddle/JOINT_BackUpper/JOINT_ShoulderLeft/JOINT_ElbowLeft/JOINT_WristLeft/JOINT_FingersLeft
+        weight: 1
+      - path: JOINT_Root1/JOINT_HIP/JOINT_BackLower/JOINT_BackMiddle/JOINT_BackUpper/JOINT_ShoulderRight
+        weight: 1
+      - path: JOINT_Root1/JOINT_HIP/JOINT_BackLower/JOINT_BackMiddle/JOINT_BackUpper/JOINT_ShoulderRight/JOINT_ElbowRight
+        weight: 1
+      - path: JOINT_Root1/JOINT_HIP/JOINT_BackLower/JOINT_BackMiddle/JOINT_BackUpper/JOINT_ShoulderRight/JOINT_ElbowRight/JOINT_WristRight
+        weight: 1
+      - path: JOINT_Root1/JOINT_HIP/JOINT_BackLower/JOINT_BackMiddle/JOINT_BackUpper/JOINT_ShoulderRight/JOINT_ElbowRight/JOINT_WristRight/JOINT_FingersRight
+        weight: 1
+      - path: JOINT_Root1/JOINT_HIP/JOINT_LegUpperLeft
+        weight: 1
+      - path: JOINT_Root1/JOINT_HIP/JOINT_LegUpperLeft/JOINT_LegLowerLeft
+        weight: 1
+      - path: JOINT_Root1/JOINT_HIP/JOINT_LegUpperLeft/JOINT_LegLowerLeft/JOINT_LegAnkleLeft
+        weight: 1
+      - path: JOINT_Root1/JOINT_HIP/JOINT_LegUpperLeft/JOINT_LegLowerLeft/JOINT_LegAnkleLeft/JOINT_LegToesLeft
+        weight: 1
+      - path: JOINT_Root1/JOINT_HIP/JOINT_LegUpperRight
+        weight: 1
+      - path: JOINT_Root1/JOINT_HIP/JOINT_LegUpperRight/JOINT_LegLowerRight
+        weight: 1
+      - path: JOINT_Root1/JOINT_HIP/JOINT_LegUpperRight/JOINT_LegLowerRight/JOINT_LegAnkleRight
+        weight: 1
+      - path: JOINT_Root1/JOINT_HIP/JOINT_LegUpperRight/JOINT_LegLowerRight/JOINT_LegAnkleRight/JOINT_LegToesRight
+        weight: 1
+      - path: MOD_CharacterSlothMesh
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

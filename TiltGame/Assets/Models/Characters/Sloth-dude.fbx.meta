@@ -1,0 +1,131 @@
+fileFormatVersion: 2
+guid: 49138e43ea420bd4b8c3e68e8f419c35
+timeCreated: 1493029439
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: JOINT_BackLower
+    100002: JOINT_BackMiddle
+    100004: JOINT_BackUpper
+    100006: JOINT_ElbowLeft
+    100008: JOINT_ElbowRight
+    100010: JOINT_EyeLeft
+    100012: JOINT_EyeRight
+    100014: JOINT_FingersLeft
+    100016: JOINT_FingersRight
+    100018: JOINT_Head
+    100020: JOINT_HIP
+    100022: JOINT_LegAnkleLeft
+    100024: JOINT_LegAnkleRight
+    100026: JOINT_LegLowerLeft
+    100028: JOINT_LegLowerRight
+    100030: JOINT_LegToesLeft
+    100032: JOINT_LegToesRight
+    100034: JOINT_LegUpperLeft
+    100036: JOINT_LegUpperRight
+    100038: JOINT_Root1
+    100040: JOINT_ShoulderLeft
+    100042: JOINT_ShoulderRight
+    100044: JOINT_WristLeft
+    100046: JOINT_WristRight
+    100048: MOD_CharacterSlothMesh
+    100050: //RootNode
+    400000: JOINT_BackLower
+    400002: JOINT_BackMiddle
+    400004: JOINT_BackUpper
+    400006: JOINT_ElbowLeft
+    400008: JOINT_ElbowRight
+    400010: JOINT_EyeLeft
+    400012: JOINT_EyeRight
+    400014: JOINT_FingersLeft
+    400016: JOINT_FingersRight
+    400018: JOINT_Head
+    400020: JOINT_HIP
+    400022: JOINT_LegAnkleLeft
+    400024: JOINT_LegAnkleRight
+    400026: JOINT_LegLowerLeft
+    400028: JOINT_LegLowerRight
+    400030: JOINT_LegToesLeft
+    400032: JOINT_LegToesRight
+    400034: JOINT_LegUpperLeft
+    400036: JOINT_LegUpperRight
+    400038: JOINT_Root1
+    400040: JOINT_ShoulderLeft
+    400042: JOINT_ShoulderRight
+    400044: JOINT_WristLeft
+    400046: JOINT_WristRight
+    400048: MOD_CharacterSlothMesh
+    400050: //RootNode
+    4300000: MOD_CharacterSlothMesh
+    7400000: Take 001
+    9500000: //RootNode
+    13700000: MOD_CharacterSlothMesh
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
